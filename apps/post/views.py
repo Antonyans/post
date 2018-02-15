@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404
 from django.urls import reverse
 from django.views import View
-
+from django.shortcuts import redirect
 from apps.post.forms import PostAddForm
 from apps.post.models import Post, PostComments
 from apps.userProfile.models import UserModel
@@ -16,12 +16,13 @@ def hello(rqequest):
 
 
 def home(request):
-    print('kkkkkkkkkkkkkkkkkkkkkkkkk', request.user.id)
     # print('kkkkkkkkkkkk', user)
 
-    if authenticate != True:
+    if authenticate != False:
+        print('kkkkkkkkkkkkkkkkkkkkkkkkk', request.user.id)
+
         # return HttpResponseRedirect(reverse('posts', args=[request.user.id]))
-        return render(request, 'registration/signin.html', locals())
+        return redirect('signin')
     else:
         return render(request, 'home.html', locals())
 
