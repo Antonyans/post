@@ -28,7 +28,7 @@ def home(request):
 @login_required(login_url='/login')
 def posts(request, user_id,):
     # form1=PostAddForm( request.POST or None)
-    user = get_object_or_404(Post, id=1, )
+    user = get_object_or_404(Post, id=user_id, )
     form1 = PostAddForm(request.POST, initial={
         'user': user
     })
