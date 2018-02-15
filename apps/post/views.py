@@ -28,7 +28,7 @@ def home(request):
 @login_required(login_url='/login')
 def posts(request, user_id,):
     # form1=PostAddForm( request.POST or None)
-    user = get_object_or_404(Post, id=3, )
+    user = get_object_or_404(Post, id=1, )
     form1 = PostAddForm(request.POST, initial={
         'user': user
     })
@@ -42,7 +42,7 @@ def posts(request, user_id,):
     post = Post.objects.all()
     # vv = get_object_or_404(Post, author=author)
     # print('pppppppppppp', vv)
-    comment = PostComments.objects.filter(author_comment_id=Post('author_id'))
+    comment = PostComments.objects.filter(author_comment_id=3)
 
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', comment)
     comentlist = [comment]
@@ -88,38 +88,22 @@ class AddPost(View):
 def chek_username(request):
     if request.GET:
         user_name = request.GET['username']
-        users = UserModel.objects.values('username')
-        listt = []
-        for usernames in users:
-            listt.append(usernames.values())
-            print(listt)
-            x = listt
-        if user_name in str(x):
-            print('mtav arajin@')
+        users = UserModel.objects.filter(username=user_name)
+        if users:
             return HttpResponse('no', content_type='text/html')
         else:
-            print('mtav erkrord@')
-            print(listt)
-            print(user_name)
             return HttpResponse('ok', content_type='text/html')
     else:
-        print('mtav verj@')
         return HttpResponse('ok', content_type='text/html')
 
 
 def check_email(request):
     if request.GET:
         email = request.GET['email']
-        users_email = UserModel.objects.values('email')
-        listt = []
-        print('request email', email)
-        for emaill_user in users_email:
-            listt.append(emaill_user.values())
-            x = listt
-        if str(email) in str(x):
+        users_email = UserModel.objects.filter(email=email)
+        if users_email:
             return HttpResponse('no', content_type='text/html')
         else:
-            print('mtav erkrord@')
             return HttpResponse('ok', content_type='text/html')
     else:
         return HttpResponse('ok', content_type='text/html')

@@ -9,7 +9,8 @@
         <div class="col-md-5 col-md-offset-6">
             <form method="post">
                 {% csrf_token %}
-                <div class="form-group" ><label class="control-label" for="id_username">Username</label><input
+
+                 <div class="form-group" ><label class="control-label" for="id_username">Username</label><input
                         name="username" required="" id="id_username" class="form-control" maxlength="150" autofocus=""
                         placeholder="Username"
                         autocomplete="off"
@@ -66,9 +67,8 @@
 
                 </div>
 
-
-                {# {{form}}#}
-                {# {% bootstrap_form form %} #}
+                {# {{form}} #}
+                 {# {% bootstrap_form form %} #}
                 <input type="submit" class="btn btn-primary" value="Sign UP!">
             </form>
         </div>

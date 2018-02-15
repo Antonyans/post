@@ -12,7 +12,7 @@ def signup(request):
     if request.POST and form.is_valid():
         form = UserForm(request.POST or None)
         form.save()
-        return render(request, 'registration/signup.html', {'form': form})
+        return render(request, 'posts.html')
     else:
         form = UserForm()
         return render(request, 'registration/signup.html', {'form': form})
