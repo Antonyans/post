@@ -42,7 +42,7 @@ def posts(request, user_id,):
     post = Post.objects.all()
     # vv = get_object_or_404(Post, author=author)
     # print('pppppppppppp', vv)
-    comment = PostComments.objects.filter(author_comment_id=3)
+    comment = PostComments.objects.filter(author_comment_id=user_id)
 
     print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', comment)
     comentlist = [comment]
