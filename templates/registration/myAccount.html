@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+<h3>my account</h3>
+<a href="{% url 'home' %}">Home</a>
+
+<div class="">
+    <h3> My page  {{ request.user.username }}!</h3>
+</div>
+<form action="" method="post">{% csrf_token %}
+    {% bootstrap_form form %}
+    {{message}}
+    <input type="submit" value="Update" />
+</form>
+{%endblock%}

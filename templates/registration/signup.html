@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block content %}
+    <h3>signup form</h3>
+
+    <div class="row">
+        <div class="col-md-5 col-md-offset-6">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group" ><label class="control-label" for="id_username">Username</label><input
+                        name="username" required="" id="id_username" class="form-control" maxlength="150" autofocus=""
+                        placeholder="Username"
+                        autocomplete="off"
+                        title="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only." type="text">
+
+                        <img id = 'imgLoad' src="{%static 'images/userDefoultAvatar/loader-gif-6.gif'%}" width='40px'>
+                        <img id = 'imgTrue' src="{%static 'images/userDefoultAvatar/true.png'%}" width='40px'>
+                        <img id = 'imgFalse' src="{%static 'images/userDefoultAvatar/false.png'%}" width='40px'>
+
+                    <div class="help-block">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+                </div>
+
+                <div class="form-group"><label class="control-label" for="id_email">Email address</label><input
+                        name="email" id="id_email" class="form-control" maxlength="254" placeholder="Email address"
+                        title="" type="email">
+                        <span id='emailEror'>Email is alredy exist</span>
+                        <img id = 'imgLoadEmail' src="{%static 'images/userDefoultAvatar/loader-gif-6.gif'%}" width='40px'>
+                        <img id = 'imgTrueEmail' src="{%static 'images/userDefoultAvatar/true.png'%}" width='40px'>
+                        <img id = 'imgFalseEmail' src="{%static 'images/userDefoultAvatar/false.png'%}" width='40px'>
+                </div>
+                <div class="form-group"><label class="control-label" for="id_password1">Password</label><input
+                        name="password1" required="" id="id_password1" class="form-control" placeholder="Password"
+                        title="Your password can&amp;#39;t be too similar to your other personal information.Your password must contain at least 8 characters.Your password can&amp;#39;t be a commonly used password.Your password can&amp;#39;t be entirely numeric."
+                        type="password">
+
+                    <div class="help-block">
+                        <ul>
+                            <li>Your password must contain at least 8 characters.</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="form-group"><label class="control-label" for="id_password2">Password
+                    confirmation</label><input name="password2" required="" id="id_password2" class="form-control"
+                                               placeholder="Password confirmation"
+                                               title="Enter the same password as before, for verification."
+                                               type="password">
+
+                    <div class="help-block">
+                      <span id='pass2-helptext'>Enter the same password as before, for verification.</span>
+                      <span id='passError'>Passwords do not match!</span>
+                    </div>
+                    <img id = 'imgLoadPass' src="{%static 'images/userDefoultAvatar/loader-gif-6.gif'%}" width='40px'>
+                    <img id = 'imgTruePass' src="{%static 'images/userDefoultAvatar/true.png'%}" width='40px'>
+                    <img id = 'imgFalsePass' src="{%static 'images/userDefoultAvatar/false.png'%}" width='40px'>
+                </div>
+                <div class="form-group"><label class="control-label" for="id_user_image">User image</label>
+                    <div class="row bootstrap3-multi-input">
+                        <div class="col-xs-12"><input name="user_image" id="id_user_image" class=""
+                                                      title="Profile Picture" type="file"></div>
+                    </div>
+
+                    <div class="help-block">Profile Picture</div>
+
+                </div>
+
+
+                {# {{form}}#}
+                {# {% bootstrap_form form %} #}
+                <input type="submit" class="btn btn-primary" value="Sign UP!">
+            </form>
+        </div>
+    </div>
+
+    {% block js %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static "js/jsajax.js" %}"></script>
+    {% endblock %}
+{% endblock content %}

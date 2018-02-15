@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <div class="">
+        <h3> Logined width {{ request.user.username }}!</h3>
+        <a href="{% url 'logout' %}">logauth</a>
+    </div>
+    <div class="col-md-12 column">
+      {% for idd in pk  %}
+        +++{{idd.text}}
+      {% endfor %}****{{ request.user.author}}
+        <form method="post">
+          {% csrf_token %}
+            <div class="col-md-8 col-md-offset-2 fieldWrapper form-group">
+                {# {{form.text.errors}}#}
+                {# <input type="text" name="" value="" placeholder="Post Add..."> #}
+                {# {{form.author}}#}
+                <select name="author" required="" id="id_author" style="display:none">
+                  <option for='author' value="{{request.user.id}}" type="hidden">{{request.user.username}}</option>
+                </select>
+                {{ form1.text }}
+                {# {{form1.author}} #}
+                {# {{form1}} #}
+                <input type="submit" name="" value="Post" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+
+    <div class="comments-container">
+        <ul id="comments-list" class="comments-list">
+            {% for post in posts %}
+                {{ request.user.username }}
+                user id {{post.text}}
+                +++++++++++++++{{post.author_id}}
+
+                <div class="comment-main-level">
+                    <!-- Avatar -->
+                    {% if post.author.user_image %}
+
+                        <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
+                    {% else %}
+                        <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
+                                                         alt=""></div>
+                    {% endif %}
+                    <!-- Contenedor del Comentario -->
+                    <div class="comment-box">
+                        <div class="comment-head">
+                            <h6 class="comment-name by-author"><a
+                                    href="#">{{ post.author }}</a></h6>
+                            <span>Post Created: {{ post.create_data }}</span>
+                            <i class="fa fa-reply"></i>
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="comment-content">
+                            {{ post.text }}
+                        </div>
+
+                        {# <div class="container">#}
+                        <span><input type="button" value="Comment {{ comentCount }}" class='commentbtn'></span>
+                        {# </div>#}
+                    </div>
+
+                </div>
+                <!-- Comment to Posts -->
+                <div class='comentIncoment'>
+
+                    <ul class="comments-list reply-list">
+                        {% for comment in comments %}
+                            <li>
+                                <!-- Avatar -->author_id{{user.id}}
+                                {% if comment.author_comment.author.user_image %}
+                                    <div class="comment-avatar"><img
+                                            src="/{{ comment.author_comment.author.user_image.url }}" alt=""></div>
+                                {% else %}
+                                    <div class="comment-avatar"><img
+                                            src="{% static "/images/userDefoultAvatar/Avatar.png" %}" alt=""></div>
+                                {% endif %}
+                                <!-- Contenedor del Comentario -->
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name"><a href="#">{{ comment.author_comment }}</a></h6>
+                                        <span>{{ comment.create_data }}</span>
+                                        <i class="fa fa-reply"></i>
+                                        <i class="fa fa-heart"></i>
+                                    </div>
+                                    <div class="comment-content">
+                                        {{ comment.text_coment }}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    {% block js %}
+        <script type="text/javascript" src="{% static 'js/myjs.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% endblock js %}
+
+
+{% endblock content %}
