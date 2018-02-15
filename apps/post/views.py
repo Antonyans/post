@@ -16,13 +16,10 @@ def hello(rqequest):
 
 
 def home(request):
-    # print('kkkkkkkkkkkkkkkkkkkkkkkkk', request.user_id)
-    # print('kkkkkkkkkkkk', user)
-
-    if authenticate != False:
+    if authenticate is True:
         return HttpResponseRedirect(reverse('posts', args=[request.user.id]))
     else:
-        return render(request, 'home.html', locals())
+        return render(request, 'registration/signin.html', locals())
 
 
 @login_required(login_url='/login')
