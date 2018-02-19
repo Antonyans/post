@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from apps.post.forms import PostAddForm
 from apps.post.models import Post, PostComments
 from apps.userProfile.models import UserModel
+from django.views import generic
 
 
 # Create your views here.
@@ -29,24 +30,18 @@ def home(request):
 
 @login_required(login_url='/login')
 def posts(request, user_id,):
-    # form1=PostAddForm( request.POST or None)
-    user = get_object_or_404(Post, id=user_id, )
-    form1 = PostAddForm(request.POST, initial={
-        'user': user
-    })
+    form1 = PostAddForm(request.POST)
     if request.POST and form1.is_valid():
-        author = request.POST['author']
+        author = request.POST['author_comment']
         post = form1.save(commit=False)
         post.author_id = author
         post.save()
         print('kkkkkkkkkkkk', user_id)
     # post = Post.objects.filter(id=user_id)
     post = Post.objects.all()
-    # vv = get_object_or_404(Post, author=author)
-    # print('pppppppppppp', vv)
-    # comment = PostComments.objects.filter(author_comment_id=4)
+
     comment = PostComments.objects.all()
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', comment)
+    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', Post.objects.get(postcomments = 1))
     comentlist = [comment]
     for comentslenght in comentlist:
         try:
@@ -56,13 +51,27 @@ def posts(request, user_id,):
         except:
             comentCount = 0
 
-    context = {'comments': comment, 'posts': post, "comentCount": comentCount, 'form1': form1, 'user': user}
+    context = {'comments': comment, 'posts': post, "comentCount": comentCount, 'form1': form1, }
     return render(request, 'posts.html', context)
 
 
-def detail(request, author_comment_id):
-    return HttpResponse("You're looking at question %s." % author_comment_id)
+def comments(request, post_id=1):
+    print ('post_id',post_id)
+    print(Post.objects.get(id =post_id))
+    post = Post.objects.get(id =post_id)
+    comment = PostComments.objects.filter(post_coment_id=post_id)
+    print(comment)
+    comentlist = [comment]
+    for comentslenght in comentlist:
+        try:
+            comentCount = len(comentslenght)
+            if comentCount < 1:
+                return 0
+        except:
+            comentCount = 0
 
+    context = {'comments': comment, 'posts': post, "comentCount": comentCount,}
+    return render(request, 'postcomments.html', context)
 
 class AddPost(View):
     def get(self, request, user_id):

@@ -59,7 +59,8 @@ ROOT_URLCONF = 'posts.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR, 'templates'],
+        # 'DIRS': [BASE_DIR, 'templates'],
+        'DIRS': ['/var/www/posts/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,4 +140,4 @@ DATABASES['default'].update(db_from_env)
 
 # AUTH_USER_MODEL = 'apps.userProfile.models.UserModel'
 
-LOGOUT_REDIRECT_URL = '/signup'
+LOGOUT_REDIRECT_URL = '/login'
