@@ -2,6 +2,9 @@
 
 {% block content %}
     <h3>home page</h3>
-
+    {% for result in search_list  %}
+    <h3>{{result.text}}</h3><br>
+      {# {{result.author}} #}
+    {% endfor %}
 
 {% endblock %}

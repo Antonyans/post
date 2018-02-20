@@ -13,6 +13,9 @@ class Post(models.Model):
 
     def __str__(self):
         return self.text
+    def __str__(self):
+        return str(self.id)
+        print ('iiiiiiiiiiiiiiiiii',str(self.id))
 
 
 class PostComments(models.Model):

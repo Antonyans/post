@@ -56,44 +56,36 @@
                         </div>
 
                         {# <div class="container">#}
-                        <span><input type="button" value="Comment {{ comentCount }}" class='commentbtn'></span>
+                        <a href="/post/get/{{post.id}}"><button type="button" name="button"> more</button></a>
+
                         {# </div>#}
                     </div>
 
                 </div>
-                <!-- Comment to Posts -->
-                <div class='comentIncoment'>
 
-                    <ul class="comments-list reply-list">
-                        {% for comment in comments %}
-                            <li>
-                                <!-- Avatar -->author_id{{user.id}}
-                                {% if comment.author_comment.author.user_image %}
-                                    <div class="comment-avatar"><img
-                                            src="/{{ comment.author_comment.author.user_image.url }}" alt=""></div>
-                                {% else %}
-                                    <div class="comment-avatar"><img
-                                            src="{% static "/images/userDefoultAvatar/Avatar.png" %}" alt=""></div>
-                                {% endif %}
-                                <!-- Contenedor del Comentario -->
-                                <div class="comment-box">
-                                    <div class="comment-head">
-                                        <h6 class="comment-name"><a href="#">{{ comment.author_comment }}</a></h6>
-                                        <span>{{ comment.create_data }}</span>
-                                        <i class="fa fa-reply"></i>
-                                        <i class="fa fa-heart"></i>
-                                    </div>
-                                    <div class="comment-content">
-                                        {{ comment.text_coment }}
-                                    </div>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
                 </li>
             {% endfor %}
+
         </ul>
+        <!-- pagination div -->
+        <div class="pagination">
+              <span class="step-links">
+                  {% if posts.has_previous %}
+                      <a href="?page=1">&laquo; first &nbsp;</a>
+                      <a href="?page={{ posts.previous_page_number }}">previous</a>
+                  {% endif %}
+
+                  <span class="current">
+                      Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                  </span>
+
+                  {% if posts.has_next %}
+                      <a href="?page={{ posts.next_page_number }}">next &nbsp;</a>
+                      <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+              </span>
+          </div>
+
     </div>
 
 

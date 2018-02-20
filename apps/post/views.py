@@ -5,10 +5,12 @@ from django.shortcuts import render, HttpResponse, render_to_response, get_objec
 from django.urls import reverse
 from django.views import View
 from django.shortcuts import redirect
-from apps.post.forms import PostAddForm
+from apps.post.forms import PostAddForm, CommentFormAdd
 from apps.post.models import Post, PostComments
 from apps.userProfile.models import UserModel
 from django.views import generic
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 
 # Create your views here.
@@ -32,46 +34,63 @@ def home(request):
 def posts(request, user_id,):
     form1 = PostAddForm(request.POST)
     if request.POST and form1.is_valid():
-        author = request.POST['author_comment']
+        # author = request.POST['author']
         post = form1.save(commit=False)
-        post.author_id = author
+        post.author_id = user_id
         post.save()
-        print('kkkkkkkkkkkk', user_id)
-    # post = Post.objects.filter(id=user_id)
-    post = Post.objects.all()
-
-    comment = PostComments.objects.all()
-    print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', Post.objects.get(postcomments = 1))
-    comentlist = [comment]
-    for comentslenght in comentlist:
-        try:
-            comentCount = len(comentslenght)
-            if comentCount < 1:
-                return 0
-        except:
-            comentCount = 0
-
-    context = {'comments': comment, 'posts': post, "comentCount": comentCount, 'form1': form1, }
+    postlist = Post.objects.all().order_by('-create_data')
+    paginator = Paginator(postlist, 5)
+    page = request.GET.get('page')
+    post = paginator.get_page(page)
+    context = {'posts': post, 'form1': form1, }
     return render(request, 'posts.html', context)
 
 
 def comments(request, post_id=1):
-    print ('post_id',post_id)
-    print(Post.objects.get(id =post_id))
-    post = Post.objects.get(id =post_id)
-    comment = PostComments.objects.filter(post_coment_id=post_id)
-    print(comment)
+    form = CommentFormAdd(request.POST)
+    if request.POST and form.is_valid():
+        author_comment = request.POST['author_comment']
+        post_coment =request.POST['post_coment']
+        comment = form.save(commit=False)
+        comment.post_coment_id=int(post_coment)
+        comment.author_comment_id=author_comment
+        comment.save()
+    else:
+        form = CommentFormAdd()
+    try:
+        post = Post.objects.get(id = post_id)
+    except AttributeError:
+        return HttpResponse('no posts')
+
+    try:
+        comment = PostComments.objects.filter(post_coment_id=post_id)
+    except AttributeError:
+        return HttpResponse('no posts')
+
     comentlist = [comment]
     for comentslenght in comentlist:
         try:
             comentCount = len(comentslenght)
             if comentCount < 1:
-                return 0
+                comentCount=0
         except:
             comentCount = 0
+    context = { 'posts': post, 'comments':comment, 'comentCount': comentCount, 'form':form, }
+    return render(request, 'postcoments.html', context)
 
-    context = {'comments': comment, 'posts': post, "comentCount": comentCount,}
-    return render(request, 'postcomments.html', context)
+
+def search(request):
+    querry = request.GET.get('q')
+    print(querry)
+    search_list = Post.objects.filter(
+            Q(text__icontains=querry)
+            # Q(author__icontains=querry)
+    )
+    return render(request, 'home.html', {'search_list': search_list})
+
+
+
+
 
 class AddPost(View):
     def get(self, request, user_id):
