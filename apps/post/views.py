@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views import View
 from django.shortcuts import redirect
@@ -11,6 +12,7 @@ from apps.userProfile.models import UserModel
 from django.views import generic
 from django.core.paginator import Paginator
 from django.db.models import Q
+import json
 
 
 # Create your views here.
@@ -79,14 +81,17 @@ def comments(request, post_id=1):
     return render(request, 'postcoments.html', context)
 
 
-def search(request):
+def search(request, user_id):
     querry = request.GET.get('q')
     print(querry)
-    search_list = Post.objects.filter(
+    search_list = list(Post.objects.filter(
             Q(text__icontains=querry)
             # Q(author__icontains=querry)
-    )
-    return render(request, 'home.html', {'search_list': search_list})
+    ))
+    return_str = render_to_string('home.html', {'search_list': search_list})
+    return HttpResponse(json.dumps(return_str), content_type='application/json')
+    # return render_to_response('home.html', {'search_list': search_list})
+
 
 
 

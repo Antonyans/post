@@ -11,7 +11,7 @@ urlpatterns = [
     path('hello', views.hello, name='hello'),
     path('chek_username', views.chek_username, name='chek_username'),
     path('check_email', views.check_email, name='check_email'),
-    path('search/', views.search, name='search'),
+    path('post/<int:user_id>/search/', views.search, name='search'),
 
 
 ]
