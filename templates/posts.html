@@ -26,6 +26,10 @@
         </form>
     </div>
 
+    {% block search %}
+        
+    {% endblock search %}
+
     <div class="comments-container">
         <ul id="comments-list" class="comments-list">
             {% for post in posts %}

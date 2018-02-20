@@ -37,7 +37,7 @@ $('#search-form').submit(function(e) {
   // var txt = $("#search-form").val();
 
     $.get("search/", $(this).serialize(), function(data) {
-        $('#posts').html(data);
+        $('.posts').html(data);
         console.log(data);
     });
     e.preventDefault();

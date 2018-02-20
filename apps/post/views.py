@@ -1,18 +1,17 @@
+import json
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.core.paginator import Paginator
+from django.db.models import Q
+from django.shortcuts import redirect
 from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404
 from django.template.loader import render_to_string
-from django.urls import reverse
 from django.views import View
-from django.shortcuts import redirect
+
 from apps.post.forms import PostAddForm, CommentFormAdd
 from apps.post.models import Post, PostComments
 from apps.userProfile.models import UserModel
-from django.views import generic
-from django.core.paginator import Paginator
-from django.db.models import Q
-import json
 
 
 # Create your views here.
@@ -33,7 +32,7 @@ def home(request):
 
 
 @login_required(login_url='/login')
-def posts(request, user_id,):
+def posts(request, user_id, ):
     form1 = PostAddForm(request.POST)
     if request.POST and form1.is_valid():
         # author = request.POST['author']
@@ -52,15 +51,15 @@ def comments(request, post_id=1):
     form = CommentFormAdd(request.POST)
     if request.POST and form.is_valid():
         author_comment = request.POST['author_comment']
-        post_coment =request.POST['post_coment']
+        post_coment = request.POST['post_coment']
         comment = form.save(commit=False)
-        comment.post_coment_id=int(post_coment)
-        comment.author_comment_id=author_comment
+        comment.post_coment_id = int(post_coment)
+        comment.author_comment_id = author_comment
         comment.save()
     else:
         form = CommentFormAdd()
     try:
-        post = Post.objects.get(id = post_id)
+        post = Post.objects.get(id=post_id)
     except AttributeError:
         return HttpResponse('no posts')
 
@@ -74,10 +73,10 @@ def comments(request, post_id=1):
         try:
             comentCount = len(comentslenght)
             if comentCount < 1:
-                comentCount=0
+                comentCount = 0
         except:
             comentCount = 0
-    context = { 'posts': post, 'comments':comment, 'comentCount': comentCount, 'form':form, }
+    context = {'posts': post, 'comments': comment, 'comentCount': comentCount, 'form': form, }
     return render(request, 'postcoments.html', context)
 
 
@@ -85,16 +84,12 @@ def search(request, user_id):
     querry = request.GET.get('q')
     print(querry)
     search_list = list(Post.objects.filter(
-            Q(text__icontains=querry)
-            # Q(author__icontains=querry)
+        Q(text__icontains=querry)
+        # Q(author__icontains=querry)
     ))
-    return_str = render_to_string('home.html', {'search_list': search_list})
+    return_str = render_to_string('ajaxsearch.html', {'search_list': search_list})
     return HttpResponse(json.dumps(return_str), content_type='application/json')
     # return render_to_response('home.html', {'search_list': search_list})
-
-
-
-
 
 
 class AddPost(View):

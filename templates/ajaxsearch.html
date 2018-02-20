@@ -1,0 +1,32 @@
+
+ {% block search %}
+ <div class="posts">
+   {% for post in search_list %}
+
+       <div class="comment-main-level">
+           <!-- Avatar -->
+           {% if post.author.user_image %}
+
+               <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
+           {% else %}
+               <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
+                                                alt=""></div>
+           {% endif %}
+           <!-- Contenedor del Comentario -->
+           <div class="comment-box">
+               <div class="comment-head">
+                   <h6 class="comment-name by-author"><a
+                           href="#">{{ post.author }}</a></h6>
+                   <span>Post Created: {{ post.create_data }}</span>
+                   <i class="fa fa-reply"></i>
+                   <i class="fa fa-heart"></i>
+               </div>
+               <div class="comment-content">
+                   {{ post.text }}
+               </div>
+               <a href="/post/get/{{post.id}}"><button type="button" name="button"> more</button></a>
+           </div>
+       </div>
+   {% endfor %}
+ </div>
+ {% endblock search %}
