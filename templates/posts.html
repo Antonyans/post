@@ -53,6 +53,7 @@
                     {% else %}
                         <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
                                                          alt=""></div>
+
                     {% endif %}
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
@@ -71,6 +72,8 @@
                         <a href="/post/get/{{post.id}}">
                           <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
                         </a>
+                        <a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="" class="img-rounded center-block"></a>{{likecount}}
+                        <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="" class="img-rounded center-block"></a>{{likecount}}
 
                         {# </div>#}
                     </div>
