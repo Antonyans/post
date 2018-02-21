@@ -4,38 +4,46 @@
     <div class="">
         <h3> Logined width {{ request.user.username }}!</h3>
         <a href="{% url 'logout' %}">logauth</a>
+        <form  action="search/" class="navbar-form navbar-left" id='search-form'>
+               <div class="form-group">
+                 <input type="text" class="form-control" placeholder="Search" width="50px" name='q'>
+               </div>
+               <button type="submit" class="btn btn-default" id='searchPost'>Submit</button>
+        </form>
     </div>
-    <div class="col-md-12 column">
-      {% for idd in pk  %}
-        +++{{idd.text}}
-      {% endfor %}****{{ request.user.author}}
+    <div class="col-md-12 column postAddClass">
         <form method="post">
           {% csrf_token %}
             <div class="col-md-8 col-md-offset-2 fieldWrapper form-group">
-                {# {{form.text.errors}}#}
-                {# <input type="text" name="" value="" placeholder="Post Add..."> #}
-                {# {{form.author}}#}
                 <select name="author" required="" id="id_author" style="display:none">
                   <option for='author' value="{{request.user.id}}" type="hidden">{{request.user.username}}</option>
                 </select>
-                {{ form1.text }}
-                {# {{form1.author}} #}
-                {# {{form1}} #}
+                {# {{ form1.text }} #}
+                <div class="form-group">
+                   <label for="comment">ADD Post:</label>
+                   <textarea class="form-control" name="text" required="" cols="20" maxlength="300" id="id_text" rows="4" placeholder="Enter your comment her..."></textarea>
+                </div>
                 <input type="submit" name="" value="Post" class="btn btn-primary">
             </div>
         </form>
     </div>
 
     {% block search %}
-        
-    {% endblock search %}
 
-    <div class="comments-container">
+    <div class="posts">
+          <!-- div vith ajax search  -->
+    </div>
+    {% endblock search %}
+    <a href="/post/addlike/{{post.id}}/"> like{{post_likes.likes}}</a>
+
+    <div class="comments-container divforpostsWiew">
         <ul id="comments-list" class="comments-list">
             {% for post in posts %}
                 {{ request.user.username }}
                 user id {{post.text}}
                 +++++++++++++++{{post.author_id}}
+
+ <a href="/post/addlike/{{post.id}}/"> like</a>{{likecount}}
 
                 <div class="comment-main-level">
                     <!-- Avatar -->
@@ -60,7 +68,9 @@
                         </div>
 
                         {# <div class="container">#}
-                        <a href="/post/get/{{post.id}}"><button type="button" name="button"> more</button></a>
+                        <a href="/post/get/{{post.id}}">
+                          <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
+                        </a>
 
                         {# </div>#}
                     </div>

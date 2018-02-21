@@ -26,3 +26,13 @@ class PostComments(models.Model):
 
     def __str__(self):
         return self.author_comment.username
+
+
+class Likes(models.Model):
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    likes= models.IntegerField(default=0)
+    dislikes= models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.likes)

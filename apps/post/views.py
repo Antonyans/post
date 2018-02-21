@@ -8,9 +8,10 @@ from django.shortcuts import redirect
 from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404
 from django.template.loader import render_to_string
 from django.views import View
-
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
 from apps.post.forms import PostAddForm, CommentFormAdd
-from apps.post.models import Post, PostComments
+from apps.post.models import Post, PostComments, Likes
 from apps.userProfile.models import UserModel
 
 
@@ -32,12 +33,12 @@ def home(request):
 
 
 @login_required(login_url='/login')
-def posts(request, user_id, ):
+def posts(request,):
     form1 = PostAddForm(request.POST)
     if request.POST and form1.is_valid():
         # author = request.POST['author']
         post = form1.save(commit=False)
-        post.author_id = user_id
+        post.author_id = request.user.id
         post.save()
     postlist = Post.objects.all().order_by('-create_data')
     paginator = Paginator(postlist, 5)
@@ -62,12 +63,10 @@ def comments(request, post_id=1):
         post = Post.objects.get(id=post_id)
     except AttributeError:
         return HttpResponse('no posts')
-
     try:
         comment = PostComments.objects.filter(post_coment_id=post_id)
     except AttributeError:
         return HttpResponse('no posts')
-
     comentlist = [comment]
     for comentslenght in comentlist:
         try:
@@ -80,16 +79,49 @@ def comments(request, post_id=1):
     return render(request, 'postcoments.html', context)
 
 
-def search(request, user_id):
+def search(request):
     querry = request.GET.get('q')
     print(querry)
     search_list = list(Post.objects.filter(
         Q(text__icontains=querry)
         # Q(author__icontains=querry)
-    ))
-    return_str = render_to_string('ajaxsearch.html', {'search_list': search_list})
+    ).order_by('-create_data'))
+    # paginator = Paginator(search, 2)
+    # page = request.GET.get('page')
+    # search_list = paginator.get_page(page)
+    return_str = render_to_string('ajaxsearch.html', {'search_list': search_list, 'q':querry,})
     return HttpResponse(json.dumps(return_str), content_type='application/json')
     # return render_to_response('home.html', {'search_list': search_list})
+
+def addlike(request, post_id):
+    user =  request.user.id
+    post = post_id
+    nolike = Likes.objects.filter(author_id=user, post_id=int(post))
+    if nolike:
+        print('layq@ arden ka')
+        like =Likes.objects.get(author_id=user, post_id=int(post))
+        like.delete()
+    else:
+        print('avelacnel like')
+        like =Likes.objects.create(author_id=user, post_id=int(post))
+        like.likes  +=1
+        like.save()
+    return render(request, 'posts.html')
+
+
+
+def likecount(request):
+    likelist = Likes.objects.filter(post_id=int(post))
+    likes = [likelist]
+    for likelenght in likes:
+        try:
+            likecount = len(likelenght)
+            if likecount < 1:
+                likecount = 0
+        except:
+            likecount = 0
+    context = {'likecount':likecount}
+    return render(request, 'posts.html', context)
 
 
 class AddPost(View):

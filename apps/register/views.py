@@ -29,7 +29,7 @@ def signin(request):
         user = authenticate(username=username, password=password)
         if user:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('posts', args=[request.user.id]))
+            return HttpResponseRedirect('post')
         else:
             loginError = 'Please enter corect Username or Password'
             message = {'loginError': loginError}

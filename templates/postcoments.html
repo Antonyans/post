@@ -8,10 +8,7 @@
       </div>
       <div class="comments-container">
           <ul id="comments-list" class="comments-list">
-              {# {% for post in posts %} #}
-                  {{ request.user.username }}
-                  user id {{posts.text}}
-                  +++++++++++++++{{posts.author_id}}
+                                +++++++++++++++{{posts.author_id}}
 
                   <div class="comment-main-level">
                       <!-- Avatar -->
@@ -34,10 +31,7 @@
                           <div class="comment-content">
                               {{ posts.text }}
                           </div>
-
-                          {# <div class="container">#}
-                          <span><input type="button" value="Comment {{ comentCount }}" class='commentbtn'></span>
-                          {# </div>#}
+                          <span class="glyphicon glyphicon-comment"><input type="button" value="Comment {{ comentCount }}"  data-toggle="collapse" class='commentbtn'></span>
                       </div>
 
                   </div>
@@ -90,10 +84,13 @@
                     <select name="post_coment" required="" id="id_post_coment" style="display:none">
                       <option value="{{posts.id}}"></option>
                     </select>
+                    <div class="form-group">
+                       <label for="comment">ADD Coment:</label>
+                       <textarea class="form-control" name="text_coment" required="" cols="20" maxlength="300" id="id_text_coment" rows="4" maxlength="300" placeholder="Enter your comment her..."></textarea>
+                    </div>
+                  {# {{ form.text_coment}} #}
 
-                  {{ form.text_coment}}
-
-                  <input type="submit" name="" value="Post" class="btn btn-primary">
+                  <input type="submit" name="" value="Add comment" class="btn btn-primary">
               </div>
           </form>
       </div>

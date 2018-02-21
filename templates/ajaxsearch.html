@@ -1,32 +1,65 @@
-
+{# {% extends "posts.html" %} #}
+{% load static %}
  {% block search %}
- <div class="posts">
-   {% for post in search_list %}
 
-       <div class="comment-main-level">
-           <!-- Avatar -->
-           {% if post.author.user_image %}
+ <div class="comments-container">
+     <h3>Results for " {{q}} ": Found {{ search_list|length }} Item</h3>
+     <ul id="comments-list" class="comments-list">
+         {% for post in search_list %}
+             <div class="comment-main-level">
+                 <!-- Avatar -->
+                 {% if post.author.user_image %}
 
-               <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
-           {% else %}
-               <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
-                                                alt=""></div>
-           {% endif %}
-           <!-- Contenedor del Comentario -->
-           <div class="comment-box">
-               <div class="comment-head">
-                   <h6 class="comment-name by-author"><a
-                           href="#">{{ post.author }}</a></h6>
-                   <span>Post Created: {{ post.create_data }}</span>
-                   <i class="fa fa-reply"></i>
-                   <i class="fa fa-heart"></i>
-               </div>
-               <div class="comment-content">
-                   {{ post.text }}
-               </div>
-               <a href="/post/get/{{post.id}}"><button type="button" name="button"> more</button></a>
-           </div>
-       </div>
-   {% endfor %}
+                     <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
+                 {% else %}
+                     <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
+                                                      alt=""></div>
+                 {% endif %}
+                 <!-- Contenedor del Comentario -->
+                 <div class="comment-box">
+                     <div class="comment-head">
+                         <h6 class="comment-name by-author"><a
+                                 href="#">{{ post.author }}</a></h6>
+                         <span>Post Created: {{ post.create_data }}</span>
+                         <i class="fa fa-reply"></i>
+                         <i class="fa fa-heart"></i>
+                     </div>
+                     <div class="comment-content">
+                         {{ post.text }}
+                     </div>
+                     <a href="/post/get/{{post.id}}">
+                       <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
+                    </a>
+                 </div>
+
+             </div>
+
+             </li>
+         {% endfor %}
+       </ul>
+
+         <!-- pagination div-->
+        <!--  <div class="pagination">
+               <span class="step-links">
+                   {% if search_list.has_previous %}
+                       <a href="?page=1">&laquo; first &nbsp;</a>
+                       <a href="?page={{ search_list.previous_page_number }}">previous</a>
+                   {% endif %}
+
+                   <span class="current">
+                       Page {{ search_list.number }} of {{ search_list.paginator.num_pages }}.
+                   </span>
+
+                   {% if post.has_next %}
+                       <a href="?page={{ search_list.next_page_number }}">next &nbsp;</a>
+                       <a href="?page={{ search_list.paginator.num_pages }}">last &raquo;</a>
+                   {% endif %}
+               </span>
+           </div>  -->
+         {% if not search_list %}
+            <h3> No posts for this query. {{q}}</h3>
+         {% endif %}
+
  </div>
+
  {% endblock search %}
