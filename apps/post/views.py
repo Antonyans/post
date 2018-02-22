@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import redirect
-from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404
+from django.urls import reverse
+from django.shortcuts import render, HttpResponse, render_to_response, get_object_or_404, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.views import View
 from django.core.exceptions import ObjectDoesNotExist
@@ -75,7 +76,16 @@ def comments(request, post_id=1):
                 comentCount = 0
         except:
             comentCount = 0
-    context = {'posts': post, 'comments': comment, 'comentCount': comentCount, 'form': form, }
+    likelist = Likes.objects.filter(post_id=int(post_id))
+    likes = [likelist]
+    for likelenght in likes:
+        try:
+            likecount = len(likelenght)
+            if likecount < 1:
+                likecount = 0
+        except:
+            likecount = 0
+    context = {'posts': post, 'comments': comment, 'comentCount': comentCount, 'form': form, 'likecount':likecount}
     return render(request, 'postcoments.html', context)
 
 
@@ -101,12 +111,19 @@ def addlike(request, post_id):
         print('layq@ arden ka')
         like =Likes.objects.get(author_id=user, post_id=int(post))
         like.delete()
+        postLike = Post.objects.get(id=int(post))
+        postLike.like -= 1
+        postLike.save()
     else:
         print('avelacnel like')
         like =Likes.objects.create(author_id=user, post_id=int(post))
+        postLike = Post.objects.get(id=int(post))
+        postLike.like += 1
+        postLike.save()
         like.likes  +=1
         like.save()
-    return render(request, 'posts.html')
+    # return render(request, 'posts.html')
+    return HttpResponse('post')
 
 
 

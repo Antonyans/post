@@ -39,17 +39,13 @@
     <div class="comments-container divforpostsWiew">
         <ul id="comments-list" class="comments-list">
             {% for post in posts %}
-                {{ request.user.username }}
-                user id {{post.text}}
-                +++++++++++++++{{post.author_id}}
-
- <a href="/post/addlike/{{post.id}}/"> like</a>{{likecount}}
-
                 <div class="comment-main-level">
                     <!-- Avatar -->
+                    <div class="comment-avatar"><img src="{{ post.author.user_image.urls }}" alt=""></div>
+
                     {% if post.author.user_image %}
 
-                        <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
+                        <div class="comment-avatar"><img src="{{ post.author.user_image.url }}" alt=""></div>
                     {% else %}
                         <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
                                                          alt=""></div>
@@ -72,8 +68,8 @@
                         <a href="/post/get/{{post.id}}">
                           <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
                         </a>
-                        <a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="" class="img-rounded center-block"></a>{{likecount}}
-                        <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="" class="img-rounded center-block"></a>{{likecount}}
+                        <a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"></a>{{post.like}}
+                        <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{post.dislike}}
 
                         {# </div>#}
                     </div>

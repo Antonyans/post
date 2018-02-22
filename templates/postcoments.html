@@ -32,6 +32,9 @@
                               {{ posts.text }}
                           </div>
                           <span class="glyphicon glyphicon-comment"><input type="button" value="Comment {{ comentCount }}"  data-toggle="collapse" class='commentbtn'></span>
+                          <span><a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"></a>{{posts.like}}</span>
+                          <span><a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{posts.dislike}}</span>
+
                       </div>
 
                   </div>

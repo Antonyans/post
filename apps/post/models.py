@@ -9,6 +9,8 @@ from apps.userProfile.models import UserModel
 class Post(models.Model):
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     text = models.TextField(max_length=300)
+    like = models.IntegerField(default=0)
+    dislike = models.IntegerField(default=0)
     create_data = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

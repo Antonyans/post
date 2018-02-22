@@ -56,6 +56,11 @@ body {
     position: relative;
 }
 
+#like, #dislike: hover{
+  width: 48px;
+  height: 48px;
+
+}
 /**
  * Lineas / Detalles
  -----------------------*/
