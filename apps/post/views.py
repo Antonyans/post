@@ -136,16 +136,7 @@ def likecount(request):
     context = {'likecount':likecount}
     return render(request, 'posts.html', context)
 
-@login_required(login_url='/login')
-class AddPost(View):
-    def get(self, request, user_id):
-        user = get_object_or_404(Post, id=user_id)
-        form = PostAddForm(initial={
-            'user': user
-        })
-        print('krakadil')
-        return render(request, 'posts.html', {'user': user, 'form': form}, locals())
-        # return render(request, 'posts.html', locals())
+
 
     def post(self, request, user_id):
         if request.POST:
