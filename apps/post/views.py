@@ -48,7 +48,7 @@ def posts(request,):
     context = {'posts': post, 'form1': form1, }
     return render(request, 'posts.html', context)
 
-
+@login_required(login_url='/login')
 def comments(request, post_id=1):
     form = CommentFormAdd(request.POST)
     if request.POST and form.is_valid():
@@ -79,7 +79,7 @@ def comments(request, post_id=1):
     context = {'post': post, 'comments': comment, 'comentCount': comentCount, 'form': form,}
     return render(request, 'postcoments.html', context)
 
-
+@login_required(login_url='/login')
 def search(request):
     querry = request.GET.get('q')
     print(querry)
@@ -94,6 +94,7 @@ def search(request):
     return HttpResponse(json.dumps(return_str), content_type='application/json')
     # return render_to_response('home.html', {'search_list': search_list})
 
+@login_required(login_url='/login')
 def addlike(request, post_id):
 # def addlike(request):
     user =  request.user.id
@@ -135,7 +136,7 @@ def likecount(request):
     context = {'likecount':likecount}
     return render(request, 'posts.html', context)
 
-
+@login_required(login_url='/login')
 class AddPost(View):
     def get(self, request, user_id):
         user = get_object_or_404(Post, id=user_id)
