@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
+{% block title %}
+  <title>postComments</title>
+{% endblock %}
 {% block content %}
       <div class="">
           <h3> Logined width {{ request.user.username }}!</h3>
@@ -8,35 +10,35 @@
       </div>
       <div class="comments-container">
           <ul id="comments-list" class="comments-list">
-                                +++++++++++++++{{posts.author_id}}
-
                   <div class="comment-main-level">
                       <!-- Avatar -->
-                      {% if posts.author.user_image %}
-
-                          <div class="comment-avatar"><img src="/{{ posts.author.user_image.url }}" alt=""></div>
+                      {% if post.author.user_image %}
+                          <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
                       {% else %}
-                          <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
-                                                           alt=""></div>
+                          <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"alt=""></div>
                       {% endif %}
                       <!-- Contenedor del Comentario -->
                       <div class="comment-box">
                           <div class="comment-head">
                               <h6 class="comment-name by-author"><a
-                                      href="#">{{ posts.author }}</a></h6>
-                              <span>Post Created: {{ posts.create_data }}</span>
+                                      href="#">{{ post.author }}</a></h6>
+                              <span>Post Created: {{ post.create_data }}</span>
                               <i class="fa fa-reply"></i>
                               <i class="fa fa-heart"></i>
                           </div>
                           <div class="comment-content">
-                              {{ posts.text }}
+                              {{ post.text }}
                           </div>
-                          <span class="glyphicon glyphicon-comment"><input type="button" value="Comment {{ comentCount }}"  data-toggle="collapse" class='commentbtn'></span>
-                          <span><a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"></a>{{posts.like}}</span>
-                          <span><a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{posts.dislike}}</span>
-
+                            <span class="glyphicon glyphicon-comment">
+                              <input type="button" value="Comment {{ comentCount }}"  data-toggle="collapse" class='commentbtn'>
+                            </span>
+                            <span>
+                              <span  id='likevalue' data='{{ post.id}}'><img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"><span ><small id="countlike{{post.id}}">{{post.like}}</small></span></span>
+                            </span>
+                            <span>
+                              {# <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{posts.dislike}} #}
+                            </span>
                       </div>
-
                   </div>
                   <!-- Comment to Posts -->
                   <div class='comentIncoment'>
@@ -44,7 +46,7 @@
                       <ul class="comments-list reply-list">
                           {% for comment in comments %}
                               <li>
-                                  <!-- Avatar -->author_id{{user.id}}
+                                  <!-- Avatar -->
                                   {% if comment.author_comment.author.user_image %}
                                       <div class="comment-avatar"><img
                                               src="/{{ comment.author_comment.author.user_image.url }}" alt=""></div>
@@ -99,6 +101,7 @@
       </div>
 
       {% block js %}
+          <script type="text/javascript" src="{% static 'js/jsajax.js' %}"></script>
           <script type="text/javascript" src="{% static 'js/myjs.js' %}"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       {% endblock js %}

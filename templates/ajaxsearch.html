@@ -27,8 +27,9 @@
                      <div class="comment-content">
                          {{ post.text }}
                      </div>
-                     <a href="/post/get/{{post.id}}">
-                       <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
+                  
+                       <span id='likevalue' data='{{ post.id}}'><img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"><span ><small id="countlike{{post.id}}">{{post.like}}</small></span></span>
+
                     </a>
                  </div>
 

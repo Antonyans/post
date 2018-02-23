@@ -13,6 +13,7 @@ urlpatterns = [
     path('check_email', views.check_email, name='check_email'),
     path('post/search/', views.search, name='search'),
     path('post/addlike/<int:post_id>/', views.addlike, name='addlike'),
+    # path('post/addlike/', views.addlike, name='addlike')
 
 
 

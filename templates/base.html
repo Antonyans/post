@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-{% load static %}
+{% load staticfiles %}
+{% block title %}
+  <title>home</title>
+{% endblock %}
 <html>
 <head>
     <meta charset="utf-8">
+
     <title>base</title>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
@@ -10,7 +14,9 @@
 
 </head>
 <body style="background-color: #C9C2D0;">
-
+  {%if user.authenticate %}
+      <span><a href="{%url 'posts'%}"><h3>Home</h3></a></span>
+  {%endif%}
 
   {% block content %}
 

@@ -76,16 +76,7 @@ def comments(request, post_id=1):
                 comentCount = 0
         except:
             comentCount = 0
-    likelist = Likes.objects.filter(post_id=int(post_id))
-    likes = [likelist]
-    for likelenght in likes:
-        try:
-            likecount = len(likelenght)
-            if likecount < 1:
-                likecount = 0
-        except:
-            likecount = 0
-    context = {'posts': post, 'comments': comment, 'comentCount': comentCount, 'form': form, 'likecount':likecount}
+    context = {'post': post, 'comments': comment, 'comentCount': comentCount, 'form': form,}
     return render(request, 'postcoments.html', context)
 
 
@@ -104,6 +95,7 @@ def search(request):
     # return render_to_response('home.html', {'search_list': search_list})
 
 def addlike(request, post_id):
+# def addlike(request):
     user =  request.user.id
     post = post_id
     nolike = Likes.objects.filter(author_id=user, post_id=int(post))
@@ -114,6 +106,8 @@ def addlike(request, post_id):
         postLike = Post.objects.get(id=int(post))
         postLike.like -= 1
         postLike.save()
+        return HttpResponse('dislike')
+
     else:
         print('avelacnel like')
         like =Likes.objects.create(author_id=user, post_id=int(post))
@@ -122,8 +116,9 @@ def addlike(request, post_id):
         postLike.save()
         like.likes  +=1
         like.save()
+        return HttpResponse('like')
     # return render(request, 'posts.html')
-    return HttpResponse('post')
+    return HttpResponse('like')
 
 
 

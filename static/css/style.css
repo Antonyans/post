@@ -39,7 +39,17 @@ body {
     margin: 60px 20px 15px;
     width: 768px;
 }
-
+.search-input{
+  width: 20%;
+  float: right;
+}
+.btnSearch{
+  float: right;
+  height: 33px;
+}
+ #like{
+   cursor: pointer;
+ }
 .comments-container h1 {
     font-size: 36px;
     color: #283035;

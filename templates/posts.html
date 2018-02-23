@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% block title %}
+  <title>post</title>
+{% endblock %}
 {% block content %}
     <div class="">
         <h3> Logined width {{ request.user.username }}!</h3>
         <a href="{% url 'logout' %}">logauth</a>
-        <form  action="search/" class="navbar-form navbar-left" id='search-form'>
-               <div class="form-group">
-                 <input type="text" class="form-control" placeholder="Search" width="50px" name='q'>
-               </div>
-               <button type="submit" class="btn btn-default" id='searchPost'>Submit</button>
-        </form>
+        <div >
+          <form  action="search/" class="navbar-form navbar-left" id='search-form'>
+                 <div class="form-group">
+                   <button type="submit" class="btn btn-default btnSearch" id='searchPost'>Search</button>
+                   <input type="text" class="search-input" placeholder="Search..." width="50px" name='q'>
+                 </div>
+          </form>
+        </div><br>
+
     </div>
     <div class="col-md-12 column postAddClass">
         <form method="post">
@@ -34,22 +40,15 @@
           <!-- div vith ajax search  -->
     </div>
     {% endblock search %}
-    <a href="/post/addlike/{{post.id}}/"> like{{post_likes.likes}}</a>
-
     <div class="comments-container divforpostsWiew">
         <ul id="comments-list" class="comments-list">
             {% for post in posts %}
                 <div class="comment-main-level">
                     <!-- Avatar -->
-                    <div class="comment-avatar"><img src="{{ post.author.user_image.urls }}" alt=""></div>
-
                     {% if post.author.user_image %}
-
-                        <div class="comment-avatar"><img src="{{ post.author.user_image.url }}" alt=""></div>
+                        <div class="comment-avatar"><img src="/{{ post.author.user_image.url }}" alt=""></div>
                     {% else %}
-                        <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"
-                                                         alt=""></div>
-
+                        <div class="comment-avatar"><img src="{% static 'images/userDefoultAvatar/Avatar.png' %}"alt=""></div>
                     {% endif %}
                     <!-- Contenedor del Comentario -->
                     <div class="comment-box">
@@ -65,17 +64,17 @@
                         </div>
 
                         {# <div class="container">#}
+                        <!--  like button -->
                         <a href="/post/get/{{post.id}}">
                           <button type="button" class="btn btn-outline-secondary"name="button">Read more &raquo;</button>
                         </a>
-                        <a href="/post/addlike/{{post.id}}/"> <img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"></a>{{post.like}}
-                        <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{post.dislike}}
+                        {# <a href="/post/addlike/{{post.id}}/" id='likevalue'> <img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"></a>{{post.like}} #}
+                        <span id='likevalue' data='{{ post.id}}'><img src="{%static 'images/icon/like.png'%}" alt="Like" id='like' class="img-rounded center-block"><span ><small id="countlike{{post.id}}">{{post.like}}</small></span></span>
+                        {# <a href="/post/addlike/{{post.id}}/"><img src="{%static 'images/icon/dislike1.png'%}" alt="Dislike" id='dislike' class="img-rounded center-block"></a>{{post.dislike}} #}
 
                         {# </div>#}
                     </div>
-
                 </div>
-
                 </li>
             {% endfor %}
 
@@ -103,6 +102,7 @@
 
 
     {% block js %}
+        <script type="text/javascript" src="{% static 'js/jsajax.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/myjs.js' %}"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% endblock js %}

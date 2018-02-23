@@ -101,3 +101,39 @@ $(document).on( 'keydown', '#id_password2',function(){
   };
 //////////////////////////////////////////////////////////
 });
+
+
+//////////////////////add like////////////
+$(document).on('click', '#likevalue', function(){
+  var value = $(this , '#likevalue').attr('data');
+  var span = $(this , '#countlike').text();
+  like();
+
+  function like(){
+    $.ajax({
+      type: "GET",
+      url: "/post/addlike/"+parseInt(value),
+      data: {
+        "like": value,
+      },
+      dataType: "text",
+      cache: false,
+
+      success: function(data){
+        if (data =='like'){
+          span=parseInt(span)+1
+          console.log(span)
+          $('#countlike'+value).text(span);
+
+        }
+        else if(data == 'dislike'){
+          console.log('dislike')
+          span=parseInt(span)-1
+          console.log(span)
+          $('#countlike'+value).text(span);
+
+        }
+      }
+    });
+  };
+});

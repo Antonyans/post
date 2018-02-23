@@ -11,11 +11,16 @@ from django.urls import reverse
 
 def signup(request):
     if request.POST:
-        form = UserForm( request.POST)
+        form = UserForm( request.POST, request.FILES)
         if request.POST and form.is_valid():
             form = UserForm(request.POST or None)
+            form.save(commit=False)
+            form.user_image = form.cleaned_data['user_image']
+            # print('imageeee', form.user_image)
             form.save()
-            return render(request, 'posts.html', locals())
+            # form.user_image.save()
+            # form.user_image.save()
+            return redirect('/login')
     else:
         form = UserForm()
         return render(request, 'registration/signup.html', {'form': form})
