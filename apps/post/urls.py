@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path
 from apps.post import views
-from apps.post.views import AddPost
 
 urlpatterns = [
     path('post/', views.posts, name='posts'),
