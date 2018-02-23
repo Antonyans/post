@@ -65,7 +65,7 @@ def comments(request, post_id=1):
     except AttributeError:
         return HttpResponse('no posts')
     try:
-        comment = PostComments.objects.filter(post_coment_id=post_id)
+        comment = PostComments.objects.filter(post_coment_id=post_id).order_by('-create_data')
     except AttributeError:
         return HttpResponse('no posts')
     comentlist = [comment]
@@ -76,13 +76,13 @@ def comments(request, post_id=1):
                 comentCount = 0
         except:
             comentCount = 0
-    context = {'post': post, 'comments': comment, 'comentCount': comentCount, 'form': form,}
+
+    context = {'posts': post, 'post':post, 'comments': comment, 'comentCount': comentCount, 'form': form}
     return render(request, 'postcoments.html', context)
 
 @login_required(login_url='/login')
 def search(request):
     querry = request.GET.get('q')
-    print(querry)
     search_list = list(Post.objects.filter(
         Q(text__icontains=querry)
         # Q(author__icontains=querry)
@@ -93,7 +93,6 @@ def search(request):
     return_str = render_to_string('ajaxsearch.html', {'search_list': search_list, 'q':querry,})
     return HttpResponse(json.dumps(return_str), content_type='application/json')
     # return render_to_response('home.html', {'search_list': search_list})
-
 @login_required(login_url='/login')
 def addlike(request, post_id):
 # def addlike(request):
@@ -101,7 +100,6 @@ def addlike(request, post_id):
     post = post_id
     nolike = Likes.objects.filter(author_id=user, post_id=int(post))
     if nolike:
-        print('layq@ arden ka')
         like =Likes.objects.get(author_id=user, post_id=int(post))
         like.delete()
         postLike = Post.objects.get(id=int(post))
@@ -110,7 +108,6 @@ def addlike(request, post_id):
         return HttpResponse('dislike')
 
     else:
-        print('avelacnel like')
         like =Likes.objects.create(author_id=user, post_id=int(post))
         postLike = Post.objects.get(id=int(post))
         postLike.like += 1
@@ -137,18 +134,27 @@ def likecount(request):
     return render(request, 'posts.html', context)
 
 
-
-    def post(self, request, user_id):
-        if request.POST:
-            form = PostAddForm(request.POST or None)
-            if form.is_valid():
-                post = form.save(commit=False)
-                post.save()
-                print(form)
-                return render(request, 'posts.html', {'user': user, 'form': form}, locals())
-            else:
-                form = PostAddForm()
-            return render(request, 'posts.html', {'user': user, 'form': form}, locals())
+# class AddPost(View):
+#     def get(self, request, user_id):
+#         user = get_object_or_404(Post, id=user_id)
+#         form = PostAddForm(initial={
+#             'user': user
+#         })
+#         print('krakadil')
+#         return render(request, 'posts.html', {'user': user, 'form': form}, locals())
+#         # return render(request, 'posts.html', locals())
+#
+#     def post(self, request, user_id):
+#         if request.POST:
+#             form = PostAddForm(request.POST or None)
+#             if form.is_valid():
+#                 post = form.save(commit=False)
+#                 post.save()
+#                 print(form)
+#                 return render(request, 'posts.html', {'user': user, 'form': form}, locals())
+#             else:
+#                 form = PostAddForm()
+#             return render(request, 'posts.html', {'user': user, 'form': form}, locals())
 
 
 def chek_username(request):

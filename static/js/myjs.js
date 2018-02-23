@@ -3,7 +3,6 @@ $(document).ready(function () {
         var id = event.target.attributes.nodeValue;
         $(".comentIncoment").toggle(1000);
 
-
     });
     console.log(event.target.nodName);
 

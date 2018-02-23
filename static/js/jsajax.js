@@ -52,15 +52,12 @@ $(document).on('keydown', '#id_email', function(){
 
       success: function(data){
         if (data == 'ok'){
-          console.log('ok')
           $('#imgLoadEmail').hide();
           $('#imgTrueEmail').show();
           $('#imgFalseEmail').hide();
           $('#emailEror').hide();
         }
         else if(data == 'no'){
-          console.log('no')
-
           $('#imgLoadEmail').hide();
           $('#imgTrueEmail').hide();
           $('#imgFalseEmail').show();
@@ -122,16 +119,12 @@ $(document).on('click', '#likevalue', function(){
       success: function(data){
         if (data =='like'){
           span=parseInt(span)+1
-          console.log(span)
           $('#countlike'+value).text(span);
 
         }
         else if(data == 'dislike'){
-          console.log('dislike')
           span=parseInt(span)-1
-          console.log(span)
           $('#countlike'+value).text(span);
-
         }
       }
     });
