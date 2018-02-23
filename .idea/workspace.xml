@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aa9bd0e4-9cf8-4510-92bc-ae9637544e06" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/post/models.py" afterPath="$PROJECT_DIR$/apps/post/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/post/urls.py" afterPath="$PROJECT_DIR$/apps/post/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/post/views.py" afterPath="$PROJECT_DIR$/apps/post/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/register/forms.py" afterPath="$PROJECT_DIR$/apps/register/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/register/views.py" afterPath="$PROJECT_DIR$/apps/register/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/userProfile/models.py" afterPath="$PROJECT_DIR$/apps/userProfile/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/style.css" afterPath="$PROJECT_DIR$/static/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jsajax.js" afterPath="$PROJECT_DIR$/static/js/jsajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ajaxsearch.html" afterPath="$PROJECT_DIR$/templates/ajaxsearch.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/postcoments.html" afterPath="$PROJECT_DIR$/templates/postcoments.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/posts.html" afterPath="$PROJECT_DIR$/templates/posts.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registration/signin.html" afterPath="$PROJECT_DIR$/templates/registration/signin.html" />
-    </list>
+    <list default="true" id="aa9bd0e4-9cf8-4510-92bc-ae9637544e06" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,30 +129,18 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apps/post/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2074">
-              <caret line="128" column="12" lean-forward="false" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+            <state relative-caret-position="2091">
+              <caret line="129" column="12" lean-forward="false" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <marker date="1519390915850" expanded="true" signature="1725:2765" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="2788:3361" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="2993:3109" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="3393:4178" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="3548:3809" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="3820:4103" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4177:4178" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4205:4555" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4312:4467" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4325:4425" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4578:5396" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4615:4907" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4703:4737" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4946:5396" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="4971:5396" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="5056:5252" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="5426:5781" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="5446:5711" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="5809:6162" ph="..." />
-                <marker date="1519390915850" expanded="true" signature="5829:6092" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="4663:5152" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="4702:5152" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="4727:5152" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="4812:5008" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="5182:5537" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="5202:5467" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="5565:5918" ph="..." />
+                <marker date="1519395199114" expanded="true" signature="5585:5848" ph="..." />
               </folding>
             </state>
           </provider>
@@ -852,30 +825,18 @@
     <entry file="dbDummy://dbtable:/9cd34ca4/c3e48afa-0380-466e-a8b2-875517db2c56/postblog.public.post_postcomments" />
     <entry file="file://$PROJECT_DIR$/apps/post/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="128" column="12" lean-forward="false" selection-start-line="128" selection-start-column="12" selection-end-line="128" selection-end-column="12" />
+        <state relative-caret-position="2091">
+          <caret line="129" column="12" lean-forward="false" selection-start-line="129" selection-start-column="12" selection-end-line="129" selection-end-column="12" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <marker date="1519390915850" expanded="true" signature="1725:2765" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="2788:3361" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="2993:3109" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="3393:4178" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="3548:3809" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="3820:4103" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4177:4178" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4205:4555" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4312:4467" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4325:4425" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4578:5396" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4615:4907" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4703:4737" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4946:5396" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="4971:5396" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="5056:5252" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="5426:5781" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="5446:5711" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="5809:6162" ph="..." />
-            <marker date="1519390915850" expanded="true" signature="5829:6092" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="4663:5152" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="4702:5152" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="4727:5152" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="4812:5008" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="5182:5537" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="5202:5467" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="5565:5918" ph="..." />
+            <marker date="1519395199114" expanded="true" signature="5585:5848" ph="..." />
           </folding>
         </state>
       </provider>
